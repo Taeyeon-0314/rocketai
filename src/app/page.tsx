@@ -72,11 +72,11 @@ export default function Home() {
               quality={100}
             />
           </div>
-          <div className="absolute bottom-[0px] flex h-[195px] items-center justify-center w-full z-100  ">
+          <div className="absolute -bottom-[250px] flex h-full items-center justify-center w-full z-100  ">
             <Image
               alt="gradient-3"
               src="assets/gradient-3.svg"
-              className="w-full "
+              className="w-full h-full"
               width="448"
               height="195"
               quality={100}
@@ -120,8 +120,8 @@ export default function Home() {
         </div>
 
         {/* 말풍선 섹션 - 히어로와 붓 섹션 사이 */}
-        <div className="relative h-[120px] bg-transparent overflow-visible flex-shrink-0 -mt-16 z-100 ">
-          <div className="absolute left-6 top-0 w-[70%] sm:w-[60%] md:w-[55%] h-[138.78px]">
+        <div className="relative h-[120px] bg-transparent -mt-16 z-100 ">
+          <div className="absolute left-6 top-0 w-[70%] h-[138.78px] max-w-[239px] z-20">
             <Image
               src="/assets/speech-bubble.svg"
               alt="speech bubble"
@@ -180,11 +180,11 @@ export default function Home() {
               className="w-full h-full object-cover"
               fill
             />
-            <div className="absolute  w-[448px] bottom-0 h-[118px] z-0 ">
+            <div className="absolute  max-w-[448px] -bottom-[100px] h-full z-0 ">
               <Image
                 alt="Rectangle-218"
                 src="assets/Rectangle-218.svg"
-                className="w-full "
+                className="w-full h-full bottom-0"
                 width={448}
                 height={118}
                 quality={100}
