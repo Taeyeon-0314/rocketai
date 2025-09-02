@@ -1,19 +1,62 @@
 import Image from "next/image";
 
-export default function SajuTable() {
+// 사주 데이터 인터페이스 정의
+interface SajuElement {
+  korean: string;
+  chinese: string;
+  element: string;
+  color: string;
+}
+
+interface ColumnData {
+  tenStar: string;
+  tenStarKorean: string;
+  heavenlyStem: SajuElement;
+  earthlyBranch: SajuElement;
+  twelveGods: string;
+  twelveGodsKorean: string;
+  twelveStars: string;
+  twelveStarsKorean: string;
+  twelveKillers: string;
+  twelveKillersKorean: string;
+}
+
+interface NoblePerson {
+  name: string;
+  koreanName: string;
+}
+
+interface SajuData {
+  name: string;
+  birthDate: string;
+  birthTime: string;
+  columns: {
+    hour: ColumnData;
+    day: ColumnData;
+    month: ColumnData;
+    year: ColumnData;
+  };
+  noblePersons: NoblePerson[];
+}
+
+interface SajuTableProps {
+  data: SajuData;
+}
+
+export default function SajuTable({ data }: SajuTableProps) {
+  const { name, birthDate, birthTime, columns, noblePersons } = data;
+
   return (
     <div className="w-94 h-[621px] bg-[#F5F3EC] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] outline-[3px] outline-offset-[-3px] outline-[#2b557e] overflow-hidden relative">
-      {/* 제목 섹션 */}
       <div className="flex flex-col items-center justify-center pt-10 pb-4">
         <div className="text-center text-neutral-700 text-base leading-none font-bold">
-          김로켓님의 사주
+          {name}님의 사주
         </div>
         <div className="text-center text-neutral-700 text-xl font-bold leading-tight mt-3">
-          1980년 8월27일 08:10
+          {birthDate} {birthTime}
         </div>
       </div>
 
-      {/* 장식 요소들 */}
       <div className="absolute w-[110px] h-[48px] -left-[10px] top-[48px] origin-top-left overflow-hidden">
         <Image
           src="/assets/layer_1.svg"
@@ -36,15 +79,12 @@ export default function SajuTable() {
         />
       </div>
 
-      {/* 테두리 선들 */}
       <div className="w-94 h-0 left-0 top-[8px] absolute outline-1 outline-offset-[-0.50px] outline-cyan-800" />
       <div className="w-94 h-0 left-0 top-[613px] absolute outline-1 outline-offset-[-0.50px] outline-pri_navy" />
       <div className="w-90 h-[621px] left-[8px] top-0 absolute border border-pri_navy" />
 
-      {/* 메인 표 배경 */}
       <div className="w-66 h-108 left-[88.92px] top-[158.99px] absolute opacity-80 bg-white" />
 
-      {/* 하단 텍스트 */}
       <div className="w-8 h-2.5 left-[172.11px] top-[521.82px] absolute text-center justify-start text-black text-[9.78px] font-bold">
         (없음)
       </div>
@@ -52,7 +92,6 @@ export default function SajuTable() {
         (없음)
       </div>
 
-      {/* 왼쪽 라벨들 */}
       <div className="w-8 h-4 left-[37.76px] top-[219.62px] absolute text-center justify-start text-black text-xs font-bold">
         天干
       </div>
@@ -96,7 +135,6 @@ export default function SajuTable() {
         (지지)
       </div>
 
-      {/* 가로 선들 */}
       <div className="w-[330px] h-0 left-[21px] top-[267.53px] absolute outline-[0.52px] outline-offset-[-0.26px] outline-neutral-400"></div>
       <div className="w-[330px] h-0 left-[21px] top-[201.04px] absolute outline-1 outline-offset-[-0.52px] outline-black"></div>
       <div className="w-[330px] h-0 left-[21px] top-[158.99px] absolute outline-1 outline-offset-[-0.52px] outline-black"></div>
@@ -106,7 +144,6 @@ export default function SajuTable() {
       <div className="w-[330px] h-0 left-[21px] top-[466.86px] absolute outline-1 outline-offset-[-0.52px] outline-black"></div>
       <div className="w-[330px] h-0 left-[21px] top-[587.83px] absolute outline-1 outline-offset-[-0.52px] outline-black"></div>
 
-      {/* 세로 선들 */}
       <div className="w-[473.83px] h-0 left-[88.92px] top-[114px] absolute origin-top-left rotate-90 outline-1 outline-offset-[-0.52px] outline-black"></div>
       <div className="w-[473.83px] h-0 left-[154.44px] top-[114px] absolute origin-top-left rotate-90 outline-[0.49px] outline-offset-[-0.24px] outline-zinc-500"></div>
       <div className="w-[473.83px] h-0 left-[219.96px] top-[114px] absolute origin-top-left rotate-90 outline-[0.49px] outline-offset-[-0.24px] outline-zinc-500"></div>
@@ -114,7 +151,6 @@ export default function SajuTable() {
       <div className="w-[473.83px] h-0 left-[351.00px] top-[114px] absolute origin-top-left rotate-90 outline-1 outline-offset-[-0.52px] outline-black"></div>
       <div className="w-[473.83px] h-0 left-[416.52px] top-[114px] absolute origin-top-left rotate-90 outline-1 outline-offset-[-0.52px] outline-black"></div>
 
-      {/* 컬럼 헤더 */}
       <div className="w-5 h-6 left-[111.41px] top-[118.89px] absolute justify-start text-black text-xl font-bold">
         時
       </div>
@@ -128,214 +164,322 @@ export default function SajuTable() {
         年
       </div>
 
-      {/* 시 컬럼 데이터 */}
       <div className="w-7 h-8 left-[107.50px] top-[163.94px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">傷官</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.hour.tenStar}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (상관)
+          ({columns.hour.tenStarKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[107.50px] top-[340.94px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">比肩</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.hour.twelveGods}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (비견)
+          ({columns.hour.twelveGodsKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[107.50px] top-[383.96px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">死</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.hour.twelveStars}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (사)
+          ({columns.hour.twelveStarsKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[107.50px] top-[428.11px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">劫殺</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.hour.twelveKillers}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (겁살)
+          ({columns.hour.twelveKillersKorean})
         </div>
       </div>
 
-      {/* 일 컬럼 데이터 */}
       <div className="w-7 h-8 left-[173.02px] top-[163.94px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">比肩</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.day.tenStar}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (비견)
+          ({columns.day.tenStarKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[173.02px] top-[340.94px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">劫財</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.day.twelveGods}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (겁재)
+          ({columns.day.twelveGodsKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[173.18px] top-[383.96px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">帝旺</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.day.twelveStars}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (제왕)
+          ({columns.day.twelveStarsKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[173.18px] top-[428.11px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">地殺</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.day.twelveKillers}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (지살)
+          ({columns.day.twelveKillersKorean})
         </div>
       </div>
 
-      {/* 월 컬럼 데이터 */}
       <div className="w-7 h-8 left-[238.54px] top-[163.94px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">傷官</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.month.tenStar}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (상관)
+          ({columns.month.tenStarKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[238.54px] top-[340.94px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">食神</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.month.twelveGods}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (식신)
+          ({columns.month.twelveGodsKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[238.70px] top-[383.96px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">胎</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.month.twelveStars}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (태)
+          ({columns.month.twelveStarsKorean})
         </div>
       </div>
       <div className="w-10 h-8 left-[235.70px] top-[428.11px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">驛馬殺</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.month.twelveKillers}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (역마살)
+          ({columns.month.twelveKillersKorean})
         </div>
       </div>
 
-      {/* 년 컬럼 데이터 */}
       <div className="w-7 h-8 left-[304.06px] top-[163.94px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">傷官</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.year.tenStar}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (상관)
+          ({columns.year.tenStarKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[304.06px] top-[340.94px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">偏財</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.year.twelveGods}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (편재)
+          ({columns.year.twelveGodsKorean})
         </div>
       </div>
       <div className="w-7 h-8 left-[304.22px] top-[383.96px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">長生</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.year.twelveStars}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (장생)
+          ({columns.year.twelveStarsKorean})
         </div>
       </div>
       <div className="w-10 h-8 left-[300.22px] top-[428.11px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">將星殺</div>
+        <div className="text-center text-black text-sm font-bold">
+          {columns.year.twelveKillers}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (장성살)
+          ({columns.year.twelveKillersKorean})
         </div>
       </div>
 
-      {/* 귀인 데이터 */}
       <div className="w-12 h-8 left-[230.68px] top-[508.12px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">天乙</div>
+        <div className="text-center text-black text-sm font-bold">
+          {noblePersons[0]?.name}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (천을귀인)
+          ({noblePersons[0]?.koreanName})
         </div>
       </div>
       <div className="w-12 h-8 left-[297.22px] top-[471.80px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">天乙</div>
+        <div className="text-center text-black text-sm font-bold">
+          {noblePersons[1]?.name}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (천을귀인)
+          ({noblePersons[1]?.koreanName})
         </div>
       </div>
       <div className="w-12 h-8 left-[297.22px] top-[510.12px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">太極</div>
+        <div className="text-center text-black text-sm font-bold">
+          {noblePersons[2]?.name}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (태극귀인)
+          ({noblePersons[2]?.koreanName})
         </div>
       </div>
       <div className="w-12 h-8 left-[297.22px] top-[546.83px] absolute flex flex-col items-center justify-center">
-        <div className="text-center text-black text-sm font-bold">文昌</div>
+        <div className="text-center text-black text-sm font-bold">
+          {noblePersons[3]?.name}
+        </div>
         <div className="text-center text-black text-[9.78px] font-bold">
-          (문창귀인)
+          ({noblePersons[3]?.koreanName})
         </div>
       </div>
 
-      {/* 천간 지지 박스들 */}
-      {/* 시 천간 */}
       <div className="w-14 h-14 left-[94.79px] top-[206.90px] absolute">
-        <div className="w-14 h-14 left-0 top-0 absolute bg-zinc-800 rounded-xl" />
+        <div
+          className={`w-14 h-14 left-0 top-0 absolute ${columns.hour.heavenlyStem.color} rounded-xl`}
+        />
         <div className="w-14 h-14 left-0 top-0 absolute flex flex-col items-center justify-center">
-          <div className="text-white text-[7.60px] font-normal">임</div>
-          <div className="text-white text-2xl font-bold -my-1">壬</div>
-          <div className="text-white text-[8.37px] font-normal">陽水</div>
+          <div className="text-white text-[7.60px] font-normal">
+            {columns.hour.heavenlyStem.korean}
+          </div>
+          <div className="text-white text-2xl font-bold -my-1">
+            {columns.hour.heavenlyStem.chinese}
+          </div>
+          <div className="text-white text-[8.37px] font-normal">
+            {columns.hour.heavenlyStem.element}
+          </div>
         </div>
       </div>
 
-      {/* 시 지지 */}
       <div className="w-14 h-14 left-[94.79px] top-[272.42px] absolute">
-        <div className="w-14 h-14 left-0 top-0 absolute bg-teal-600 rounded-xl" />
+        <div
+          className={`w-14 h-14 left-0 top-0 absolute ${columns.hour.earthlyBranch.color} rounded-xl`}
+        />
         <div className="w-14 h-14 left-0 top-0 absolute flex flex-col items-center justify-center">
-          <div className="text-white text-[7.60px] font-normal">인</div>
-          <div className="text-white text-2xl font-bold -my-1">寅</div>
-          <div className="text-white text-[8.37px] font-normal">陽木</div>
+          <div className="text-white text-[7.60px] font-normal">
+            {columns.hour.earthlyBranch.korean}
+          </div>
+          <div className="text-white text-2xl font-bold -my-1">
+            {columns.hour.earthlyBranch.chinese}
+          </div>
+          <div className="text-white text-[8.37px] font-normal">
+            {columns.hour.earthlyBranch.element}
+          </div>
         </div>
       </div>
 
-      {/* 일 천간 */}
       <div className="w-14 h-14 left-[160.30px] top-[206.90px] absolute">
-        <div className="w-14 h-14 left-0 top-0 absolute bg-red-600 rounded-xl" />
+        <div
+          className={`w-14 h-14 left-0 top-0 absolute ${columns.day.heavenlyStem.color} rounded-xl`}
+        />
         <div className="w-14 h-14 left-0 top-0 absolute flex flex-col items-center justify-center">
-          <div className="text-white text-[7.60px] font-normal">정</div>
-          <div className="text-white text-2xl font-bold -my-1">丁</div>
-          <div className="text-white text-[8.37px] font-normal">陰火</div>
+          <div className="text-white text-[7.60px] font-normal">
+            {columns.day.heavenlyStem.korean}
+          </div>
+          <div className="text-white text-2xl font-bold -my-1">
+            {columns.day.heavenlyStem.chinese}
+          </div>
+          <div className="text-white text-[8.37px] font-normal">
+            {columns.day.heavenlyStem.element}
+          </div>
         </div>
       </div>
 
-      {/* 일 지지 */}
       <div className="w-14 h-14 left-[160.30px] top-[272.42px] absolute">
-        <div className="w-14 h-14 left-0 top-0 absolute bg-red-600 rounded-xl" />
+        <div
+          className={`w-14 h-14 left-0 top-0 absolute ${columns.day.earthlyBranch.color} rounded-xl`}
+        />
         <div className="w-14 h-14 left-0 top-0 absolute flex flex-col items-center justify-center">
-          <div className="text-white text-[7.60px] font-normal">사</div>
-          <div className="text-white text-2xl font-bold -my-1">巳</div>
-          <div className="text-white text-[8.37px] font-normal">陰火</div>
+          <div className="text-white text-[7.60px] font-normal">
+            {columns.day.earthlyBranch.korean}
+          </div>
+          <div className="text-white text-2xl font-bold -my-1">
+            {columns.day.earthlyBranch.chinese}
+          </div>
+          <div className="text-white text-[8.37px] font-normal">
+            {columns.day.earthlyBranch.element}
+          </div>
         </div>
       </div>
 
-      {/* 월 천간 */}
       <div className="w-14 h-14 left-[225.82px] top-[206.90px] absolute">
-        <div className="w-14 h-14 left-0 top-0 absolute bg-zinc-800 rounded-xl" />
+        <div
+          className={`w-14 h-14 left-0 top-0 absolute ${columns.month.heavenlyStem.color} rounded-xl`}
+        />
         <div className="w-14 h-14 left-0 top-0 absolute flex flex-col items-center justify-center">
-          <div className="text-white text-[7.60px] font-normal">계</div>
-          <div className="text-white text-2xl font-bold -my-1">癸</div>
-          <div className="text-white text-[8.37px] font-normal">陰水</div>
+          <div className="text-white text-[7.60px] font-normal">
+            {columns.month.heavenlyStem.korean}
+          </div>
+          <div className="text-white text-2xl font-bold -my-1">
+            {columns.month.heavenlyStem.chinese}
+          </div>
+          <div className="text-white text-[8.37px] font-normal">
+            {columns.month.heavenlyStem.element}
+          </div>
         </div>
       </div>
 
-      {/* 월 지지 */}
       <div className="w-14 h-14 left-[225.82px] top-[272.42px] absolute">
-        <div className="w-14 h-14 left-0 top-0 absolute bg-zinc-800 rounded-xl" />
+        <div
+          className={`w-14 h-14 left-0 top-0 absolute ${columns.month.earthlyBranch.color} rounded-xl`}
+        />
         <div className="w-14 h-14 left-0 top-0 absolute flex flex-col items-center justify-center">
-          <div className="text-white text-[7.60px] font-normal">해</div>
-          <div className="text-white text-2xl font-bold -my-1">亥</div>
-          <div className="text-white text-[8.37px] font-normal">陰水</div>
+          <div className="text-white text-[7.60px] font-normal">
+            {columns.month.earthlyBranch.korean}
+          </div>
+          <div className="text-white text-2xl font-bold -my-1">
+            {columns.month.earthlyBranch.chinese}
+          </div>
+          <div className="text-white text-[8.37px] font-normal">
+            {columns.month.earthlyBranch.element}
+          </div>
         </div>
       </div>
 
-      {/* 년 천간 */}
       <div className="w-14 h-14 left-[291.34px] top-[206.90px] absolute">
-        <div className="w-14 h-14 left-0 top-0 absolute bg-zinc-800 rounded-xl" />
+        <div
+          className={`w-14 h-14 left-0 top-0 absolute ${columns.year.heavenlyStem.color} rounded-xl`}
+        />
         <div className="w-14 h-14 left-0 top-0 absolute flex flex-col items-center justify-center">
-          <div className="text-stone-50 text-[7.60px] font-normal">계</div>
-          <div className="text-stone-50 text-2xl font-bold -my-1">癸</div>
-          <div className="text-stone-50 text-[8.37px] font-normal">陰水</div>
+          <div className="text-white text-[7.60px] font-normal">
+            {columns.year.heavenlyStem.korean}
+          </div>
+          <div className="text-white text-2xl font-bold -my-1">
+            {columns.year.heavenlyStem.chinese}
+          </div>
+          <div className="text-white text-[8.37px] font-normal">
+            {columns.year.heavenlyStem.element}
+          </div>
         </div>
       </div>
 
-      {/* 년 지지 */}
       <div className="w-14 h-14 left-[291.34px] top-[272.42px] absolute">
-        <div className="w-14 h-14 left-0 top-0 absolute bg-stone-50 rounded-xl border-1 border-black" />
+        <div
+          className={`w-14 h-14 left-0 top-0 absolute ${columns.year.earthlyBranch.color} rounded-xl`}
+        />
         <div className="w-14 h-14 left-0 top-0 absolute flex flex-col items-center justify-center">
-          <div className="text-black text-[7.60px] font-normal">유</div>
-          <div className="text-black text-2xl font-bold -my-1">酉</div>
-          <div className="text-black text-[8.37px] font-normal">陰金</div>
+          <div
+            className={`text-[7.60px] font-normal ${
+              columns.year.earthlyBranch.color.includes("stone-50")
+                ? "text-black"
+                : "text-white"
+            }`}
+          >
+            {columns.year.earthlyBranch.korean}
+          </div>
+          <div
+            className={`text-2xl font-bold -my-1 ${
+              columns.year.earthlyBranch.color.includes("stone-50")
+                ? "text-black"
+                : "text-white"
+            }`}
+          >
+            {columns.year.earthlyBranch.chinese}
+          </div>
+          <div
+            className={`text-[8.37px] font-normal ${
+              columns.year.earthlyBranch.color.includes("stone-50")
+                ? "text-black"
+                : "text-white"
+            }`}
+          >
+            {columns.year.earthlyBranch.element}
+          </div>
         </div>
       </div>
     </div>

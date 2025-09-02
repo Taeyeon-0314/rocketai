@@ -4,13 +4,9 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="max-w-md w-full bg-[#f3f2ef] flex justify-center">
-      {/* 웹툰 스타일 세로 레이아웃 */}
       <div className="w-full bg-white flex flex-col">
-        {/* 히어로 섹션 */}
         <div className="relative h-[667px] overflow-hidden flex-shrink-0">
-          {/* 흐린 배경 */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#5B5247] to-[#937C5F] blur-[10px]"></div>
-          {/* 흐릿한 한자 텍스트 배경 */}
           <div
             className="absolute left-1/2 -translate-x-1/2 top-[-15px] opacity-10 text-center text-white text-[60px] font-normal leading-[90px] tracking-[12px] blur-[4px] select-none z-10"
             aria-hidden
@@ -50,7 +46,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 인물 이미지 (단일 레이어) */}
           <div className="absolute left-[34%] top-[140px] w-[80%] h-[530px] overflow-hidden z-100">
             <Image
               src="/assets/image.min.svg"
@@ -61,7 +56,6 @@ export default function Home() {
             />
           </div>
 
-          {/* 상단/하단 그라데이션 */}
           <div className="absolute top-[0px] flex h-[195px] items-center justify-center w-full z-10  ">
             <Image
               alt="Rectangle-45"
@@ -102,7 +96,6 @@ export default function Home() {
             />
           </div>
 
-          {/* 타이틀 영역 */}
           <div className="absolute left-1/2 -translate-x-1/2 top-[69px] w-[157px] flex flex-col items-center gap-3 z-100">
             <p className="text-white text-[20px] leading-none">제 1장</p>
             <Image
@@ -119,7 +112,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 말풍선 섹션 - 히어로와 붓 섹션 사이 */}
         <div className="relative h-[120px] bg-transparent -mt-16 z-100 ">
           <div className="absolute left-6 top-0 w-[70%] h-[138.78px] max-w-[239px] z-20">
             <Image
@@ -142,9 +134,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 붓 컷 섹션 */}
         <div className="relative h-[360px] bg-[#f3f2ef] overflow-visible flex-shrink-0 -mt-20">
-          {/* 배경 장식 이미지 (좌측 하단) */}
           <div className="absolute left-0 bottom-4 w-[40%] max-w-[153px] h-[120px] opacity-80">
             <Image
               src="/assets/brush-bg.png"
@@ -154,7 +144,6 @@ export default function Home() {
               quality={100}
             />
           </div>
-          {/* 우측 붓 일러스트 */}
           <div className="absolute right-[70px] top-[100px] w-[30%] max-w-[120px] h-[285px]">
             <Image
               src="/assets/brush-illustration.png"
@@ -164,15 +153,12 @@ export default function Home() {
               quality={100}
             />
           </div>
-          {/* 효과 텍스트: 붓 이미지와 겹치도록 조정 */}
           <div className="absolute z-100 right-[150px] top-[120px] [text-shadow:rgba(255,255,255,0.3)_0px_4px_10px] text-black text-[50px] leading-none select-none">
             <p>슥슥</p>
           </div>
         </div>
 
-        {/* 하단 일러스트 섹션 */}
         <div className="relative h-[330px] bg-[#f3f2ef] overflow-visible flex-shrink-0">
-          {/* 가로 일러스트 배경 */}
           <div className="absolute left-0 top-[34px] w-full h-[306px]">
             <Image
               src="/assets/bottom-illustration.png"
@@ -191,7 +177,6 @@ export default function Home() {
               />
             </div>
           </div>
-          {/* 좌측 말풍선: 위 섹션과 겹치게 위치 조정 */}
           <div className="absolute z-20 left-14 -top-17 w-[60%] max-w-[239px] h-[150px]">
             <Image
               alt="speech-bottom"
@@ -209,9 +194,110 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 사주 표 섹션 */}
         <div className="flex justify-center flex-shrink-0 ">
-          <SajuTable />
+          <SajuTable
+            data={{
+              name: "김로켓",
+              birthDate: "1980년 8월27일",
+              birthTime: "08:10",
+              columns: {
+                hour: {
+                  tenStar: "傷官",
+                  tenStarKorean: "상관",
+                  heavenlyStem: {
+                    korean: "임",
+                    chinese: "壬",
+                    element: "陽水",
+                    color: "bg-zinc-800",
+                  },
+                  earthlyBranch: {
+                    korean: "인",
+                    chinese: "寅",
+                    element: "陽木",
+                    color: "bg-teal-600",
+                  },
+                  twelveGods: "比肩",
+                  twelveGodsKorean: "비견",
+                  twelveStars: "死",
+                  twelveStarsKorean: "사",
+                  twelveKillers: "劫殺",
+                  twelveKillersKorean: "겁살",
+                },
+                day: {
+                  tenStar: "比肩",
+                  tenStarKorean: "비견",
+                  heavenlyStem: {
+                    korean: "정",
+                    chinese: "丁",
+                    element: "陰火",
+                    color: "bg-red-600",
+                  },
+                  earthlyBranch: {
+                    korean: "사",
+                    chinese: "巳",
+                    element: "陰火",
+                    color: "bg-red-600",
+                  },
+                  twelveGods: "劫財",
+                  twelveGodsKorean: "겁재",
+                  twelveStars: "帝旺",
+                  twelveStarsKorean: "제왕",
+                  twelveKillers: "地殺",
+                  twelveKillersKorean: "지살",
+                },
+                month: {
+                  tenStar: "傷官",
+                  tenStarKorean: "상관",
+                  heavenlyStem: {
+                    korean: "계",
+                    chinese: "癸",
+                    element: "陰水",
+                    color: "bg-zinc-800",
+                  },
+                  earthlyBranch: {
+                    korean: "해",
+                    chinese: "亥",
+                    element: "陰水",
+                    color: "bg-zinc-800",
+                  },
+                  twelveGods: "食神",
+                  twelveGodsKorean: "식신",
+                  twelveStars: "胎",
+                  twelveStarsKorean: "태",
+                  twelveKillers: "驛馬殺",
+                  twelveKillersKorean: "역마살",
+                },
+                year: {
+                  tenStar: "傷官",
+                  tenStarKorean: "상관",
+                  heavenlyStem: {
+                    korean: "계",
+                    chinese: "癸",
+                    element: "陰水",
+                    color: "bg-zinc-800",
+                  },
+                  earthlyBranch: {
+                    korean: "유",
+                    chinese: "酉",
+                    element: "陰金",
+                    color: "bg-stone-50 border-1 border-black",
+                  },
+                  twelveGods: "偏財",
+                  twelveGodsKorean: "편재",
+                  twelveStars: "長生",
+                  twelveStarsKorean: "장생",
+                  twelveKillers: "將星殺",
+                  twelveKillersKorean: "장성살",
+                },
+              },
+              noblePersons: [
+                { name: "天乙", koreanName: "천을귀인" },
+                { name: "天乙", koreanName: "천을귀인" },
+                { name: "太極", koreanName: "태극귀인" },
+                { name: "文昌", koreanName: "문창귀인" },
+              ],
+            }}
+          />
         </div>
       </div>
     </div>
